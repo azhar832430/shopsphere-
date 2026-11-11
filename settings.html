@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings & System Configuration – ShopSphere Admin</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-link">
+          <div class="brand-logo-icon">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">ShopSphere</span>
+            <span class="brand-badge">SaaS Console</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-toggle-btn" id="desktopSidebarToggle" title="Toggle Sidebar">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Main Menu</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <i class="fa-solid fa-box-archive"></i>
+                <span class="nav-text">Products</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="categories.html" class="nav-link">
+                <i class="fa-solid fa-tags"></i>
+                <span class="nav-text">Categories</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <span class="nav-text">Customers</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text">Orders</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-group mt-auto">
+          <div class="nav-group-title">Configuration</div>
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link action-logout text-danger">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="nav-text">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-pill">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Admin Avatar" class="sidebar-avatar">
+          <div class="sidebar-user-meta">
+            <div class="sidebar-user-name">Alexander Wright</div>
+            <div class="sidebar-user-role">Administrator</div>
+          </div>
+          <button type="button" class="logout-quick-btn action-logout" title="Sign Out">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Shell -->
+    <main class="app-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-page-header">
+            <h1 class="page-title">Settings & System Preferences</h1>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="dashboard.html">ShopSphere</a></li>
+              <li class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></li>
+              <li class="breadcrumb-item active">Settings</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <div class="global-search-form">
+            <i class="fa-solid fa-magnifying-glass global-search-icon"></i>
+            <input type="text" id="globalSearchInput" class="global-search-input" placeholder="Search catalog, orders, SKUs..." autocomplete="off">
+            <span class="search-shortcut-badge">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button type="button" class="icon-action-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <div class="dropdown">
+            <button type="button" class="icon-action-btn" data-toggle="dropdown" data-target="notificationDropdownMenu" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="badge-unread-dot"></span>
+            </button>
+            <div class="dropdown-menu notifications-dropdown" id="notificationDropdownMenu">
+              <div class="notifications-header">
+                <span class="fw-bold" style="font-size:0.875rem;">System Notifications</span>
+                <span class="badge badge-info" style="font-size:0.6875rem;">3 New</span>
+              </div>
+              <ul class="notifications-list">
+                <li class="notification-item unread">
+                  <div class="notification-icon-box bg-primary-subtle text-primary"><i class="fa-solid fa-cart-shopping"></i></div>
+                  <div class="notification-meta">
+                    <div class="notification-text">New order <strong>#ORD-7086</strong> placed</div>
+                    <div class="notification-time">15 mins ago</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="notifications-footer">
+                <a href="orders.html" class="text-primary fw-semibold" style="font-size:0.75rem;">View Orders &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <div class="profile-pill-trigger" data-toggle="dropdown" data-target="profileDropdownMenu">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="topbar-avatar">
+              <div class="topbar-profile-info">
+                <span class="topbar-profile-name">Alexander W.</span>
+                <span class="topbar-profile-role">Admin</span>
+              </div>
+              <i class="fa-solid fa-chevron-down profile-chevron"></i>
+            </div>
+            <div class="dropdown-menu" id="profileDropdownMenu">
+              <a href="settings.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Admin Profile</a>
+              <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-gear"></i> Store Settings</a>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="dropdown-item text-danger action-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="app-content">
+        
+        <div class="page-action-header">
+          <div class="page-action-title">
+            <h2>Store Parameters & Sandbox Controls</h2>
+            <p>Configure regional currency, tax policy, administrator identity, and database simulation controls.</p>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem;" class="settings-grid">
+          
+          <!-- Column 1: Store & Admin Settings -->
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            
+            <!-- General Store Information -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">General Store Information</h3>
+                  <div class="card-subtitle">Public business branding and financial defaults</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="generalSettingsForm">
+                  <div class="form-row">
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="storeName">Platform / Brand Name</label>
+                        <input type="text" id="storeName" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="storeTagline">Brand Tagline</label>
+                        <input type="text" id="storeTagline" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="currency">Currency Code</label>
+                        <select id="currency" class="form-control">
+                          <option value="USD">USD – United States Dollar</option>
+                          <option value="EUR">EUR – Euro</option>
+                          <option value="GBP">GBP – British Pound</option>
+                          <option value="CAD">CAD – Canadian Dollar</option>
+                          <option value="PKR">PKR – Pakistani Rupee</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="currencySymbol">Currency Symbol</label>
+                        <input type="text" id="currencySymbol" class="form-control" style="max-width:90px;" required>
+                      </div>
+                    </div>
+
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="taxRate">Default Sales Tax (%)</label>
+                        <input type="number" id="taxRate" step="0.1" min="0" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="shippingFlat">Standard Shipping Fee ($)</label>
+                        <input type="number" id="shippingFlat" step="0.5" min="0" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="freeShippingThreshold">Free Shipping Above ($)</label>
+                        <input type="number" id="freeShippingThreshold" step="1" min="0" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="lowStockThreshold">Low Stock Alert Level</label>
+                        <input type="number" id="lowStockThreshold" min="1" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="contactEmail">Support Email</label>
+                        <input type="email" id="contactEmail" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="contactPhone">Support Phone</label>
+                        <input type="tel" id="contactPhone" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="storeAddress">Headquarters Address</label>
+                    <input type="text" id="storeAddress" class="form-control">
+                  </div>
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fa-solid fa-floppy-disk"></i> Save Store Settings
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Admin Profile Form -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Admin Profile Credentials</h3>
+                  <div class="card-subtitle">Manage personal profile details and security identities</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="adminProfileForm">
+                  <div style="display:flex; align-items:center; gap:1.25rem; margin-bottom:1.5rem;">
+                    <img id="adminAvatarPreview" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Admin" style="width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid var(--primary-500); box-shadow:var(--shadow-sm);">
+                    <div style="flex:1;">
+                      <label class="form-label" for="adminAvatarUrl">Avatar Image URL</label>
+                      <input type="url" id="adminAvatarUrl" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="adminName">Display Name</label>
+                        <input type="text" id="adminName" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="form-col">
+                      <div class="form-group">
+                        <label class="form-label" for="adminRole">Access Role</label>
+                        <input type="text" id="adminRole" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="adminEmail">Administrative Email</label>
+                    <input type="email" id="adminEmail" class="form-control" required>
+                  </div>
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fa-solid fa-floppy-disk"></i> Update Profile
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column 2: Data Simulation & Phase 1 Sandbox Tools -->
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Demo Sandbox & Data</h3>
+                  <div class="card-subtitle">Local storage records controller</div>
+                </div>
+              </div>
+              <div class="card-body" style="display:flex; flex-direction:column; gap:1.25rem;">
+                
+                <div class="p-3 bg-primary-subtle rounded border border-primary-subtle">
+                  <div class="fw-bold text-primary mb-1" style="font-size:0.875rem;">
+                    <i class="fa-solid fa-database me-1"></i> Phase 1 Data Model
+                  </div>
+                  <p class="text-secondary mb-0" style="font-size:0.75rem; line-height:1.5;">
+                    Data is currently maintained in browser local storage via a Promise-based Repository architecture, ready for immediate PHP PDO REST API migration.
+                  </p>
+                </div>
+
+                <div>
+                  <div class="fw-bold mb-1" style="font-size:0.875rem;">Factory Demo Reset</div>
+                  <p class="text-muted" style="font-size:0.75rem; margin-bottom:0.75rem;">
+                    Restore original seed products, customers, and test orders. Perfect for testing and presentation grading.
+                  </p>
+                  <button type="button" class="btn btn-outline btn-sm w-100" id="resetDemoDataBtn">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Reset to Factory Demo Data
+                  </button>
+                </div>
+
+                <div class="border-top pt-3">
+                  <div class="fw-bold mb-1" style="font-size:0.875rem;">Export System JSON</div>
+                  <p class="text-muted" style="font-size:0.75rem; margin-bottom:0.75rem;">
+                    Export all current catalog tables, customers, and orders into an organized JSON snapshot.
+                  </p>
+                  <button type="button" class="btn btn-secondary btn-sm w-100" id="exportJsonDataBtn">
+                    <i class="fa-solid fa-file-arrow-down"></i> Export JSON Snapshot
+                  </button>
+                </div>
+
+                <div class="border-top pt-3">
+                  <div class="fw-bold text-danger mb-1" style="font-size:0.875rem;">Danger Zone</div>
+                  <p class="text-muted" style="font-size:0.75rem; margin-bottom:0.75rem;">
+                    Erase all local store entries to test empty state components.
+                  </p>
+                  <button type="button" class="btn btn-danger btn-sm w-100" id="clearAllDataBtn">
+                    <i class="fa-solid fa-trash"></i> Wipe All Data Records
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Architecture Info Card -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Future Phase 2 Roadmap</h3>
+              </div>
+              <div class="card-body" style="font-size:0.8125rem; color:var(--text-secondary); line-height:1.6;">
+                <ul style="padding-left:1.25rem; margin-bottom:0;">
+                  <li class="mb-2"><strong>PHP PDO Endpoints:</strong> Replace repository layer in <code>store.js</code> with Fetch API.</li>
+                  <li class="mb-2"><strong>MySQL Schema:</strong> Direct column mapping for <code>products</code>, <code>categories</code>, <code>customers</code>, and <code>orders</code>.</li>
+                  <li><strong>JWT Auth:</strong> Session tokens & password hashing for secure authentication.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div>&copy; 2026 <strong>ShopSphere</strong> &bull; University Web Engineering PBL Project</div>
+        <ul class="footer-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="orders.html">Orders</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Shared Scripts -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/settings.js"></script>
+</body>
+</html>
+

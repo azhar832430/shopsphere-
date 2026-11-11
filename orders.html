@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders Management – ShopSphere Admin</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-link">
+          <div class="brand-logo-icon">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">ShopSphere</span>
+            <span class="brand-badge">SaaS Console</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-toggle-btn" id="desktopSidebarToggle" title="Toggle Sidebar">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Main Menu</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <i class="fa-solid fa-box-archive"></i>
+                <span class="nav-text">Products</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="categories.html" class="nav-link">
+                <i class="fa-solid fa-tags"></i>
+                <span class="nav-text">Categories</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <span class="nav-text">Customers</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a href="orders.html" class="nav-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text">Orders</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-group mt-auto">
+          <div class="nav-group-title">Configuration</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link action-logout text-danger">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="nav-text">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-pill">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Admin Avatar" class="sidebar-avatar">
+          <div class="sidebar-user-meta">
+            <div class="sidebar-user-name">Alexander Wright</div>
+            <div class="sidebar-user-role">Administrator</div>
+          </div>
+          <button type="button" class="logout-quick-btn action-logout" title="Sign Out">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Shell -->
+    <main class="app-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-page-header">
+            <h1 class="page-title">Orders Management</h1>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="dashboard.html">ShopSphere</a></li>
+              <li class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></li>
+              <li class="breadcrumb-item active">Orders</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <div class="global-search-form">
+            <i class="fa-solid fa-magnifying-glass global-search-icon"></i>
+            <input type="text" id="globalSearchInput" class="global-search-input" placeholder="Search catalog, orders, SKUs..." autocomplete="off">
+            <span class="search-shortcut-badge">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button type="button" class="icon-action-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <div class="dropdown">
+            <button type="button" class="icon-action-btn" data-toggle="dropdown" data-target="notificationDropdownMenu" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="badge-unread-dot"></span>
+            </button>
+            <div class="dropdown-menu notifications-dropdown" id="notificationDropdownMenu">
+              <div class="notifications-header">
+                <span class="fw-bold" style="font-size:0.875rem;">System Notifications</span>
+                <span class="badge badge-info" style="font-size:0.6875rem;">3 New</span>
+              </div>
+              <ul class="notifications-list">
+                <li class="notification-item unread">
+                  <div class="notification-icon-box bg-primary-subtle text-primary"><i class="fa-solid fa-cart-shopping"></i></div>
+                  <div class="notification-meta">
+                    <div class="notification-text">New order <strong>#ORD-7086</strong> placed</div>
+                    <div class="notification-time">15 mins ago</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="notifications-footer">
+                <a href="orders.html" class="text-primary fw-semibold" style="font-size:0.75rem;">View Orders &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <div class="profile-pill-trigger" data-toggle="dropdown" data-target="profileDropdownMenu">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="topbar-avatar">
+              <div class="topbar-profile-info">
+                <span class="topbar-profile-name">Alexander W.</span>
+                <span class="topbar-profile-role">Admin</span>
+              </div>
+              <i class="fa-solid fa-chevron-down profile-chevron"></i>
+            </div>
+            <div class="dropdown-menu" id="profileDropdownMenu">
+              <a href="settings.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Admin Profile</a>
+              <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-gear"></i> Store Settings</a>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="dropdown-item text-danger action-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="app-content">
+        
+        <div class="page-action-header">
+          <div class="page-action-title">
+            <h2>Orders & Fulfillment Processing</h2>
+            <p>Track customer purchases, calculate invoices, oversee shipments, and update payment statuses.</p>
+          </div>
+          <div class="page-action-controls">
+            <button type="button" class="btn btn-primary" id="openCreateOrderBtn">
+              <i class="fa-solid fa-plus"></i> Create New Order
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <!-- Toolbar -->
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <div class="input-icon-wrapper table-search-input">
+                <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                <input type="text" id="orderSearchInput" class="form-control" placeholder="Search by Order # or Customer...">
+              </div>
+
+              <select id="orderStatusFilter" class="filter-select">
+                <option value="all">Order Status: All</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+
+              <select id="paymentStatusFilter" class="filter-select">
+                <option value="all">Payment Status: All</option>
+                <option value="paid">Paid</option>
+                <option value="pending">Pending</option>
+                <option value="refunded">Refunded</option>
+                <option value="failed">Failed</option>
+              </select>
+            </div>
+
+            <div class="table-toolbar-right">
+              <select id="orderSortSelect" class="filter-select">
+                <option value="newest">Sort: Newest First</option>
+                <option value="date_asc">Date: Oldest First</option>
+                <option value="total_high">Total: High &rarr; Low</option>
+                <option value="total_low">Total: Low &rarr; High</option>
+                <option value="customer_asc">Customer: A &rarr; Z</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Orders Table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer</th>
+                  <th>Date & Time</th>
+                  <th>Items</th>
+                  <th>Total Amount</th>
+                  <th>Payment</th>
+                  <th>Fulfillment</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <!-- Injected dynamically via orders.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="card-footer" id="ordersPagination">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div>&copy; 2026 <strong>ShopSphere</strong> &bull; University Web Engineering PBL Project</div>
+        <ul class="footer-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="orders.html">Orders</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: CREATE NEW ORDER (WITH MULTI-ITEM BUILDER & DYNAMIC TOTALS)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="orderModal">
+    <div class="modal modal-lg" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="orderModalTitle">Create New Customer Order</h3>
+        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id="orderForm">
+        <input type="hidden" id="orderId">
+        <div class="modal-body">
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label" for="orderCustomerSelect">Customer Account <span class="required">*</span></label>
+                <select id="orderCustomerSelect" class="form-control" required>
+                  <option value="">Select customer...</option>
+                </select>
+                <div class="invalid-feedback">Please choose a customer.</div>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label" for="orderPaymentMethod">Payment Method <span class="required">*</span></label>
+                <select id="orderPaymentMethod" class="form-control" required>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="PayPal">PayPal</option>
+                  <option value="Bank Transfer">Bank Transfer / Wire</option>
+                  <option value="Cash on Delivery">Cash on Delivery</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Products Line Items Section -->
+          <div class="mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <label class="form-label mb-0 fw-bold">Order Items & Inventory Selection <span class="required">*</span></label>
+              <button type="button" class="btn btn-secondary btn-sm" id="addOrderLineItemBtn">
+                <i class="fa-solid fa-plus"></i> Add Item
+              </button>
+            </div>
+            
+            <div id="orderLineItemsList">
+              <!-- Injected dynamically via orders.js -->
+            </div>
+          </div>
+
+          <!-- Dynamic Order Calculation Summary Card -->
+          <div class="order-calculation-card mb-3">
+            <div class="calc-row">
+              <span>Items Subtotal:</span>
+              <strong id="calcSubtotal">$0.00</strong>
+            </div>
+            <div class="calc-row">
+              <span>Tax (8.5%):</span>
+              <span id="calcTax">$0.00</span>
+            </div>
+            <div class="calc-row">
+              <span>Estimated Shipping:</span>
+              <span id="calcShipping">$0.00</span>
+            </div>
+            <div class="calc-row total">
+              <span>Grand Total:</span>
+              <span id="calcGrandTotal" style="color:var(--primary-700);">$0.00</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label" for="orderPaymentStatus">Payment Status</label>
+                <select id="orderPaymentStatus" class="form-control">
+                  <option value="paid">Paid</option>
+                  <option value="pending" selected>Pending</option>
+                  <option value="failed">Failed</option>
+                  <option value="refunded">Refunded</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label" for="orderStatus">Fulfillment Status</label>
+                <select id="orderStatus" class="form-control">
+                  <option value="pending" selected>Pending</option>
+                  <option value="processing">Processing</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label" for="orderDiscountInput">Discount Applied ($)</label>
+                <input type="number" id="orderDiscountInput" class="form-control" min="0" step="0.01" value="0.00">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="orderShippingAddress">Delivery Address <span class="required">*</span></label>
+            <textarea id="orderShippingAddress" class="form-control" rows="2" placeholder="Full street address for package delivery..." required></textarea>
+            <div class="invalid-feedback">Delivery shipping address is required.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="orderNotes">Internal Notes or Customer Instructions</label>
+            <input type="text" id="orderNotes" class="form-control" placeholder="e.g. Leave with concierge or call upon arrival">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="placeOrderSubmitBtn">
+            <i class="fa-solid fa-cart-check"></i> Place Order
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: QUICK STATUS EDIT
+       ====================================================================== -->
+  <div class="modal-backdrop" id="quickEditOrderModal">
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Order <span id="quickEditOrderNum"></span></h3>
+        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id="quickEditOrderForm">
+        <input type="hidden" id="quickEditOrderId">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="quickEditOrderStatus">Order Fulfillment Status</label>
+            <select id="quickEditOrderStatus" class="form-control">
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="quickEditPaymentStatus">Payment Status</label>
+            <select id="quickEditPaymentStatus" class="form-control">
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+              <option value="refunded">Refunded</option>
+              <option value="failed">Failed</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="quickEditNotes">Order Notes</label>
+            <input type="text" id="quickEditNotes" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: VIEW PRINTABLE INVOICE
+       ====================================================================== -->
+  <div class="modal-backdrop" id="invoiceModal">
+    <div class="modal modal-lg" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Tax Invoice & Packing Slip</h3>
+        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" id="viewInvoiceContainer">
+        <!-- Injected dynamically via orders.js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="printInvoiceBtn">
+          <i class="fa-solid fa-print"></i> Print Invoice
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Scripts -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/orders.js"></script>
+</body>
+</html>
+

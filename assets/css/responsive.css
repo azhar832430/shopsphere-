@@ -1,0 +1,232 @@
+/* ==========================================================================
+   SHOPSPHERE - RESPONSIVE STYLESHEET
+   Breakpoints: 1200px, 1024px, 768px, 480px, 375px
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (<= 1200px) */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-charts-grid,
+  .dashboard-bottom-grid,
+  .settings-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tablets (<= 1024px) */
+@media (max-width: 1024px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .app-sidebar.show-mobile {
+    transform: translateX(0);
+  }
+
+  .app-main {
+    margin-left: 0 !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  .topbar-center {
+    max-width: 320px;
+    margin: 0 1rem;
+  }
+}
+
+/* Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --topbar-height: 64px;
+  }
+
+  .app-topbar {
+    padding: 0 1rem;
+  }
+
+  .app-content {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .topbar-profile-info,
+  .profile-chevron {
+    display: none;
+  }
+
+  .profile-pill-trigger {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .topbar-center {
+    display: none; /* Can be opened via quick search button or stays on mobile */
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .stat-card-value {
+    font-size: 1.5rem;
+  }
+
+  .page-action-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+
+  .page-action-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .page-action-controls .btn {
+    flex: 1;
+  }
+
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .table-toolbar-left,
+  .table-toolbar-right {
+    width: 100%;
+  }
+
+  .table-search-input {
+    max-width: 100%;
+    flex: 1;
+  }
+
+  .filter-select {
+    flex: 1;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    gap: 0.875rem;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  /* Order item row on mobile */
+  .order-line-item-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .order-line-item-row .btn-remove-item {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .invoice-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .invoice-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .invoice-meta {
+    text-align: left;
+  }
+
+  .invoice-summary-box {
+    justify-content: stretch;
+  }
+
+  .invoice-summary-table {
+    width: 100%;
+  }
+
+  .notifications-dropdown {
+    width: 290px;
+    right: -70px;
+  }
+
+  .app-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+/* Small Smart Phones (<= 480px / 375px) */
+@media (max-width: 480px) {
+  .app-content {
+    padding: 0.875rem;
+  }
+
+  .modal-backdrop {
+    padding: 0.5rem;
+  }
+
+  .modal {
+    max-height: 95vh;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1rem;
+  }
+
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .stat-card-value {
+    font-size: 1.375rem;
+  }
+
+  .form-row {
+    gap: 0.75rem;
+  }
+}

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Management – ShopSphere Admin</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-link">
+          <div class="brand-logo-icon">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">ShopSphere</span>
+            <span class="brand-badge">SaaS Console</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-toggle-btn" id="desktopSidebarToggle" title="Toggle Sidebar">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Main Menu</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <i class="fa-solid fa-box-archive"></i>
+                <span class="nav-text">Products</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a href="categories.html" class="nav-link">
+                <i class="fa-solid fa-tags"></i>
+                <span class="nav-text">Categories</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <span class="nav-text">Customers</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text">Orders</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-group mt-auto">
+          <div class="nav-group-title">Configuration</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link action-logout text-danger">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="nav-text">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-pill">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Admin Avatar" class="sidebar-avatar">
+          <div class="sidebar-user-meta">
+            <div class="sidebar-user-name">Alexander Wright</div>
+            <div class="sidebar-user-role">Administrator</div>
+          </div>
+          <button type="button" class="logout-quick-btn action-logout" title="Sign Out">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Shell -->
+    <main class="app-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-page-header">
+            <h1 class="page-title">Category Management</h1>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="dashboard.html">ShopSphere</a></li>
+              <li class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></li>
+              <li class="breadcrumb-item active">Categories</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <div class="global-search-form">
+            <i class="fa-solid fa-magnifying-glass global-search-icon"></i>
+            <input type="text" id="globalSearchInput" class="global-search-input" placeholder="Search catalog, orders, SKUs..." autocomplete="off">
+            <span class="search-shortcut-badge">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button type="button" class="icon-action-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <div class="dropdown">
+            <button type="button" class="icon-action-btn" data-toggle="dropdown" data-target="notificationDropdownMenu" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="badge-unread-dot"></span>
+            </button>
+            <div class="dropdown-menu notifications-dropdown" id="notificationDropdownMenu">
+              <div class="notifications-header">
+                <span class="fw-bold" style="font-size:0.875rem;">System Notifications</span>
+                <span class="badge badge-info" style="font-size:0.6875rem;">3 New</span>
+              </div>
+              <ul class="notifications-list">
+                <li class="notification-item unread">
+                  <div class="notification-icon-box bg-primary-subtle text-primary"><i class="fa-solid fa-cart-shopping"></i></div>
+                  <div class="notification-meta">
+                    <div class="notification-text">New order <strong>#ORD-7086</strong> placed</div>
+                    <div class="notification-time">15 mins ago</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="notifications-footer">
+                <a href="orders.html" class="text-primary fw-semibold" style="font-size:0.75rem;">View Orders &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <div class="profile-pill-trigger" data-toggle="dropdown" data-target="profileDropdownMenu">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="topbar-avatar">
+              <div class="topbar-profile-info">
+                <span class="topbar-profile-name">Alexander W.</span>
+                <span class="topbar-profile-role">Admin</span>
+              </div>
+              <i class="fa-solid fa-chevron-down profile-chevron"></i>
+            </div>
+            <div class="dropdown-menu" id="profileDropdownMenu">
+              <a href="settings.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Admin Profile</a>
+              <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-gear"></i> Store Settings</a>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="dropdown-item text-danger action-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="app-content">
+        
+        <div class="page-action-header">
+          <div class="page-action-title">
+            <h2>Product Taxonomy & Categories</h2>
+            <p>Structure your online inventory by grouping items into navigable departments.</p>
+          </div>
+          <div class="page-action-controls">
+            <button type="button" class="btn btn-primary" id="openAddCategoryBtn">
+              <i class="fa-solid fa-plus"></i> Add New Category
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <!-- Toolbar -->
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <div class="input-icon-wrapper table-search-input">
+                <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                <input type="text" id="categorySearchInput" class="form-control" placeholder="Search categories by name...">
+              </div>
+
+              <select id="categoryStatusFilter" class="filter-select">
+                <option value="all">Status: All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Category Name & Slug</th>
+                  <th>Description</th>
+                  <th>Product Count</th>
+                  <th>Created Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="categoriesTableBody">
+                <!-- Injected dynamically via categories.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="card-footer" id="categoriesPagination">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div>&copy; 2026 <strong>ShopSphere</strong> &bull; University Web Engineering PBL Project</div>
+        <ul class="footer-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: ADD / EDIT CATEGORY
+       ====================================================================== -->
+  <div class="modal-backdrop" id="categoryModal">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="categoryModalTitle">Add New Category</h3>
+        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id="categoryForm">
+        <input type="hidden" id="categoryId">
+        <div class="modal-body">
+          
+          <div class="form-group">
+            <label class="form-label" for="categoryName">Category Name <span class="required">*</span></label>
+            <input type="text" id="categoryName" class="form-control" placeholder="e.g. Smart Home & IoT" required>
+            <div class="invalid-feedback">Category name is required.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="categorySlug">URL Slug <span class="required">*</span></label>
+            <input type="text" id="categorySlug" class="form-control" placeholder="e.g. smart-home-iot" required>
+            <div class="form-helper">Used for SEO-friendly catalog routing</div>
+            <div class="invalid-feedback">A unique URL slug is required.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="categoryStatus">Status <span class="required">*</span></label>
+            <select id="categoryStatus" class="form-control">
+              <option value="active">Active (Visible)</option>
+              <option value="inactive">Inactive (Hidden)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="categoryDescription">Description</label>
+            <textarea id="categoryDescription" class="form-control" rows="3" placeholder="Brief summary of items in this department..."></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-floppy-disk"></i> Save Category
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: VIEW CATEGORY DETAILS
+       ====================================================================== -->
+  <div class="modal-backdrop" id="viewCategoryModal">
+    <div class="modal modal-lg" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title">Category Details & Products</h3>
+        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" id="viewCategoryDetailsContainer">
+        <!-- Injected dynamically via categories.js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Scripts -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/categories.js"></script>
+</body>
+</html>
+

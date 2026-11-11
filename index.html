@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere – E-Commerce Management System</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .auth-page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08) 0%, rgba(248, 250, 252, 1) 90%);
+      padding: 1.5rem;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-xl);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .auth-logo-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.75rem;
+      box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+      margin: 0 auto 1.25rem;
+    }
+
+    .auth-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .auth-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.35rem;
+      margin-bottom: 2rem;
+    }
+
+    .demo-credential-box {
+      background-color: var(--primary-50);
+      border: 1px dashed var(--primary-300);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.8125rem;
+      color: var(--primary-900);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-page-wrapper">
+    <div class="auth-card">
+      <div class="auth-logo-badge">
+        <i class="fa-solid fa-shapes"></i>
+      </div>
+      <h1 class="auth-title">ShopSphere</h1>
+      <p class="auth-subtitle">E-Commerce Management System &bull; Phase 3 Admin Console</p>
+
+      <div class="demo-credential-box">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-server text-primary"></i>
+            <strong>Phase 3 Authentication Portal</strong>
+          </div>
+          <span id="backendHealthBadge" class="badge badge-neutral" style="font-size:0.6875rem;">Detecting...</span>
+        </div>
+        <p class="mb-1 text-secondary" style="font-size: 0.75rem;">
+          Connected to PHP backend API (<code>/api/auth/login.php</code>) & MySQL database.
+        </p>
+        <div class="text-muted" style="font-size:0.75rem;">
+          Default Admin: <strong>admin@shopsphere.io</strong> &bull; Password: <strong>Admin@123</strong>
+        </div>
+      </div>
+
+      <form id="loginForm" onsubmit="handleAdminLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Administrator Email or Username</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="text" id="loginEmail" class="form-control" value="admin@shopsphere.io" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <label class="form-label mb-0" for="loginPassword">Password</label>
+            <span class="text-muted" style="font-size: 0.75rem;">Default: Admin@123</span>
+          </div>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="loginPassword" class="form-control" value="Admin@123" required autocomplete="current-password">
+          </div>
+        </div>
+
+        <button type="submit" id="loginSubmitBtn" class="btn btn-primary btn-lg w-100" style="width: 100%;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Dashboard
+        </button>
+      </form>
+
+      <div class="mt-4 pt-3 text-center border-top">
+        <div class="d-flex justify-content-center gap-3 text-muted" style="font-size: 0.75rem;">
+          <span><i class="fa-solid fa-shield-halved text-success me-1"></i> PHP Session Auth</span>
+          <span>&bull;</span>
+          <span><i class="fa-solid fa-database text-primary me-1"></i> MySQL Prepared PDO</span>
+          <span>&bull;</span>
+          <span><i class="fa-solid fa-key text-warning me-1"></i> CSRF Protected</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script>
+    // Auto-detect backend health on load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const badge = document.getElementById('backendHealthBadge');
+      if (!badge) return;
+
+      try {
+        const res = await API.health();
+        if (res.success && res.data?.database === 'connected') {
+          badge.className = 'badge badge-success';
+          badge.textContent = 'PHP & DB Active';
+        } else if (res.success) {
+          badge.className = 'badge badge-warning';
+          badge.textContent = 'DB Offline';
+        } else {
+          badge.className = 'badge badge-neutral';
+          badge.textContent = 'Static Mode';
+        }
+      } catch (e) {
+        badge.className = 'badge badge-neutral';
+        badge.textContent = 'Static Mode';
+      }
+    });
+
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginSubmitBtn');
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
+
+      try {
+        const res = await API.auth.login(email, password);
+
+        if (res.success) {
+          UI.showToast(res.message || 'Authenticated successfully. Redirecting...', 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 600);
+          return;
+        }
+
+        // If explicitly rejected with 401
+        if (res.errors && res.errors.auth) {
+          UI.showToast(res.message || 'Invalid username/email or password.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Dashboard';
+          return;
+        }
+
+        // If backend server is unreachable (e.g. running via file:// or static server)
+        UI.showToast('Backend offline. Entering client demonstration mode.', 'info');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 700);
+
+      } catch (err) {
+        console.warn('Login fallback triggered:', err);
+        UI.showToast('Entering client demonstration mode.', 'info');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 600);
+      }
+    }
+  </script>
+</body>
+</html>
+

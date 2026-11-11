@@ -1,0 +1,71 @@
+# ==============================================================================
+# SHOPSPHERE - GITIGNORE CONFIGURATION
+# ==============================================================================
+
+# 1. Environment & Sensitive Credentials (NEVER COMMIT)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.key
+*.pem
+*.cert
+
+# 2. Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# 3. Editor & IDE Configuration
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+*~
+
+# 4. Logs, Runtime & Debug Data
+*.log
+error_log
+php_errors.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tmp
+*.temp
+test*.png
+
+# 5. Session Data & Local Caches
+sessions/
+cache/
+tmp/
+.cache/
+
+# 6. Database Dumps & Ad-hoc Backups
+*.bak
+*.backup
+*.dump
+*_backup.sql
+shopsphere_backup*.sql
+
+# 7. Local Submission Packages & Generated Archives
+ShopSphere_Final_Submission.zip
+ShopSphere_Final_Submission/
+
+# 8. Uploaded Media Assets (Keep directory structure & .htaccess via .gitkeep)
+uploads/products/*
+!uploads/products/.gitkeep
+!uploads/products/.htaccess
+!uploads/.htaccess

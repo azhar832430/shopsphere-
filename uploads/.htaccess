@@ -1,0 +1,20 @@
+# Security: Deny direct execution of scripts in uploads directory
+<FilesMatch "(?i)\.(php|phtml|php3|php4|php5|php7|php8|phps|pl|py|cgi|sh|bash|exe)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Disable PHP execution engine if mod_php is active
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+Options -ExecCGI
+Options -Indexes
+
